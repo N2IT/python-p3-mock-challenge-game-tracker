@@ -20,7 +20,7 @@ class Game:
         return [ result for result in Result.all if result.game == self]
 
     def players(self):
-        return [ player for player in Result.player if result.player]
+        pass
 
     def average_score(self, player):
         pass
@@ -64,6 +64,24 @@ class Result:
         self.game = game
         self._score = score
         Result.all.append(self)
+
+    @property
+    def player(self):
+        return self._player
+    
+    @player.setter
+    def player(self, player):
+        if isinstance(player, Player):
+            return self._player = player
+
+    @property
+    def game(self):
+        return self._game
+
+    @game.setter
+    def game(self, game):
+        if isinstance(game, Game):
+            return self._game = game
 
     @property
     def score(self):
