@@ -25,13 +25,15 @@ class Game:
     def average_score(self, player):
         pass
 
+    def __str__(self):
+        return f"Game: {self.title}"
 
 class Player:
 
     all = []
 
     def __init__(self, username):
-        self.username = username
+        self._username = username
         Player.all.append(self)
 
     @property
@@ -39,21 +41,26 @@ class Player:
         return self._username
 
     @username.setter
-    def username(self, new_username):
-        if isinstance(new_username, str) and 2 < len(new_username) < 16:
-            self._name = new_username
+    def username(self, username):
+        if isinstance(username, str) and 2 < len(username) < 16:
+            self._username = username
 
     def results(self):
-        pass
+        if isinstance(result, Result):
+            [result for result in Results.all if resresult.player == self]
 
     def games_played(self):
-        pass
+        if isinstance(game, Game):
+            return 
 
     def played_game(self, game):
         pass
 
     def num_times_played(self, game):
         pass
+
+    def __str__(self):
+        return f"Player: {self.username}"
 
 class Result:
     
@@ -72,7 +79,7 @@ class Result:
     @player.setter
     def player(self, player):
         if isinstance(player, Player):
-            return self._player = player
+            self._player = player
 
     @property
     def game(self):
@@ -81,7 +88,7 @@ class Result:
     @game.setter
     def game(self, game):
         if isinstance(game, Game):
-            return self._game = game
+            self._game = game
 
     @property
     def score(self):
@@ -92,3 +99,6 @@ class Result:
         if hasattr(self, "score"):
             if isinstance(score, int) and 1 < score < 5000:
                 self._score = score
+
+    def __str__(self):
+        return f"{self.player}\n{self.game}\nScore: {self.score}"
