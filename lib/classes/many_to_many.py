@@ -41,9 +41,6 @@ class Game:
         score_number = len(all_scores)
         return score_sum / score_number
                 
-                
-
-
     def __repr__(self):
         return f"Game: {self.title}"
 
@@ -75,7 +72,14 @@ class Player:
         return [result for result in Result.all if result.player == self]
 
     def games_played(self):
-        return [ game for game in Result.all if game.player == self ]
+        game_played = []
+        for result in Result.all:
+            if result.player == self:
+                if result.game in game_played:
+                    None
+                else:
+                    game_played.append(result.game)
+        return game_played
 
     def played_game(self, game):
         pass
