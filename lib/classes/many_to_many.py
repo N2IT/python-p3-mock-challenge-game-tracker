@@ -26,11 +26,23 @@ class Game:
         players_list = []
         for result in Result.all:
             if result.game == self:
-                players_list.append(result.player)
+                if result.player in players_list:
+                    None
+                else: 
+                    players_list.append(result.player)
         return players_list
 
     def average_score(self, player):
-        pass
+        all_scores = []
+        for result in Result.all:
+            if result.player == player:
+                all_scores.append(result.score)
+        score_sum = sum(all_scores)
+        score_number = len(all_scores)
+        return score_sum / score_number
+                
+                
+
 
     def __repr__(self):
         return f"Game: {self.title}"

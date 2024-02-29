@@ -17,8 +17,7 @@ p1_g1 = Result(p1, g1, 35000)
 p2_g2 = Result(p2, g2, 45010)
 
 # print(Result.all[0].game.title)
-print(g2.players())
-print(g1.players())
+print(g2.average_score(p1))
 
 
     
