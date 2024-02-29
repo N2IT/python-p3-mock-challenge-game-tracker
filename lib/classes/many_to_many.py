@@ -1,10 +1,13 @@
 class Game:
 
-    all = []
-
-    def __init__(self, title=""):
+    def __init__(self, title="" ):
         self._title = title
-        Game.all.append(self)
+        
+        # add player to game
+        self._players = []
+
+        # add results to Game
+        self._results = []
     
     @property
     def title(self):
@@ -17,15 +20,19 @@ class Game:
                 self._title = title
 
     def results(self):
-        return [ result for result in Result.all if result.game == self]
-
+        return [ result for result in Result.all if result.game == self ]
+            
     def players(self):
-        pass
+        players_list = []
+        for result in Result.all:
+            if result.game == self:
+                players_list.append(result.player)
+        return players_list
 
     def average_score(self, player):
         pass
 
-    def __str__(self):
+    def __repr__(self):
         return f"Game: {self.title}"
 
 class Player:
@@ -34,6 +41,13 @@ class Player:
 
     def __init__(self, username):
         self._username = username
+
+        # add games to players
+        self._games = []
+
+        # add results to players
+        self._results = []
+
         Player.all.append(self)
 
     @property
@@ -46,12 +60,10 @@ class Player:
             self._username = username
 
     def results(self):
-        if isinstance(result, Result):
-            [result for result in Results.all if resresult.player == self]
+        return [result for result in Result.all if result.player == self]
 
     def games_played(self):
-        if isinstance(game, Game):
-            return 
+        return [ game for game in Result.all if game.player == self ]
 
     def played_game(self, game):
         pass
@@ -59,7 +71,7 @@ class Player:
     def num_times_played(self, game):
         pass
 
-    def __str__(self):
+    def __repr__(self):
         return f"Player: {self.username}"
 
 class Result:
@@ -71,6 +83,15 @@ class Result:
         self.game = game
         self._score = score
         Result.all.append(self)
+
+        # construct result object as SSOT
+        # populating lists within Player class
+        self.player._games.append(self.game)
+        self.player._results.append(self)
+
+        # populating lists within Game class
+        self.game._players.append(self.player)
+        self.game._results.append(self)
 
     @property
     def player(self):
@@ -100,5 +121,5 @@ class Result:
             if isinstance(score, int) and 1 < score < 5000:
                 self._score = score
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.player}\n{self.game}\nScore: {self.score}"
