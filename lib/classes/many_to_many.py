@@ -82,7 +82,11 @@ class Player:
         return game_played
 
     def played_game(self, game):
-        pass
+        for result in Result.all:
+            if result.player == self:
+                if result.game == game:
+                    return True
+        return False
 
     def num_times_played(self, game):
         pass
