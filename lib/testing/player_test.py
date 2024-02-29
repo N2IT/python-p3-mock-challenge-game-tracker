@@ -3,7 +3,7 @@ import pytest
 from classes.many_to_many import Player
 from classes.many_to_many import Game
 from classes.many_to_many import Result
-
+import ipdb
 
 class TestPlayer:
     """Player in many_to_many.py"""

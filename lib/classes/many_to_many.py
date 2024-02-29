@@ -89,7 +89,17 @@ class Player:
         return False
 
     def num_times_played(self, game):
-        pass
+        game_played_count = {}
+        for result in Result.all:
+            if result.player == self:
+                if game not in game_played_count:
+                    game_played_count[game] = 0
+                # breakpoint()
+                if game == result.game:
+                    game_played_count[game] += 1
+
+        return game_played_count[game]
+
 
     def __repr__(self):
         return f"Player: {self.username}"
